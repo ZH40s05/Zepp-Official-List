@@ -1,0 +1,33 @@
+{
+  "name": "@zh40s05/zepp-official-list",
+  "version": "0.1.0",
+  "description": "ZeppOS 官方风格列表页面控件 / Official-style list page control for ZeppOS",
+  "main": "zolist.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZH40s05/Zepp-Official-List.git"
+  },
+  "homepage": "https://github.com/ZH40s05/Zepp-Official-List#readme",
+  "bugs": {
+    "url": "https://github.com/ZH40s05/Zepp-Official-List/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "zolist.js",
+    "example/"
+  ],
+  "directories": {
+    "example": "example"
+  },
+  "keywords": [
+    "ZeppOS",
+    "list",
+    "ui",
+    "watch",
+    "Amazfit"
+  ],
+  "author": "ZHAO",
+  "license": "MIT"
+}
