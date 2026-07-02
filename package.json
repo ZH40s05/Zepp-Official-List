@@ -1,7 +1,7 @@
 {
   "name": "@zh40s05/zepp-official-list",
-  "version": "0.1.3",
-  "description": "ZeppOS 官方风格列表页面控件，含焦点、触屏、表冠滚动和底部安全 footer / Official-style ZeppOS list page control with focus, touch, crown scrolling, and bottom-safe footer spacing",
+  "version": "0.1.4",
+  "description": "ZeppOS 官方风格列表控件：支持按键焦点、触屏焦点和表冠滚动 / Official-style ZeppOS list control with key focus, touch focus and crown scrolling",
   "main": "zolist.js",
   "repository": {
     "type": "git",
