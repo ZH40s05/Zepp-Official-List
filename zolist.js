@@ -461,6 +461,7 @@ export class ListPage {
     this._scrollAnim = null
     this._scrollPos = 0
     this._dragging = false
+    this._crownScrolling = false
     this._keyScrolling = false
     this._mounted = false
     this._disposed = false
@@ -471,6 +472,7 @@ export class ListPage {
       x: this.x, y: this.y, w: this.w, h: this.h, scroll_enable: 1,
       scroll_frame_func: (frame) => {
         if (this._keyScrolling) { this._debugScroll('frame_skip_key', frame); return }
+        if (this._crownScrolling) { this._debugScroll('frame_skip_crown', frame); return }
         const frameScrollY = this._syncScrollFromFrame(frame)
         this._scrollDebugFrame++
         if (this._scrollDebugFrame <= 5 || this._scrollDebugFrame % 10 === 0) {
@@ -485,6 +487,7 @@ export class ListPage {
       },
       scroll_complete_func: (frame) => {
         if (this._keyScrolling) { this._debugScroll('complete_skip_key', frame); return }
+        if (this._crownScrolling) { this._debugScroll('complete_skip_crown', frame); return }
         const frameScrollY = this._syncScrollFromFrame(frame)
         this._debugScroll('complete_enter', frame, 'frame_scroll_y=' + this._debugValue(frameScrollY))
         if (!this._dragging) { this._debugScroll('complete_skip_not_dragging', frame); return }
@@ -545,7 +548,12 @@ export class ListPage {
     if (this._crownCb) { try { offDigitalCrown() } catch (e) {}; this._crownCb = null }
     if (this._pressTimer) { clearTimeout(this._pressTimer); this._pressTimer = null }
     if (this._crownTimer) { clearTimeout(this._crownTimer); this._crownTimer = null }
-    if (this._scrollAnim) { clearInterval(this._scrollAnim); this._scrollAnim = null }
+    this._crownScrolling = false
+    if (this._scrollAnim) {
+      clearInterval(this._scrollAnim)
+      this._scrollAnim = null
+      this._keyScrolling = false
+    }
   }
 
   setProperty(p, v) {
@@ -973,31 +981,35 @@ export class ListPage {
 
   _onCrown(key, degree) {
     if (!this.crownEnable || this.focusables.length === 0 || typeof degree !== 'number') return false
-    if (this._scrollAnim) { clearInterval(this._scrollAnim); this._scrollAnim = null }
-    if (this._activeTap) { this._activeTap.cancel(); this._activeTap = null }
-    if (!this._dragging) {
-      this._dragging = true
-      this._hideFocus()
+    if (this._scrollAnim) {
+      clearInterval(this._scrollAnim)
+      this._scrollAnim = null
+      this._keyScrolling = false
     }
+    if (this._activeTap) { this._activeTap.cancel(); this._activeTap = null }
+    this._crownScrolling = true
 
     const target = this._getScrollY() - degree * this.crownStep
     this._setScrollY(target)
     this._debugScroll('crown', undefined, 'crown_key=' + this._debugValue(key) + ' degree=' + degree + ' target=' + target)
+    this._updateCrownFocus('crown_realtime')
 
     if (this._crownTimer) clearTimeout(this._crownTimer)
     this._crownTimer = setTimeout(() => {
       this._crownTimer = null
-      if (!this._dragging) return
-      this._dragging = false
-      const idx = this._nearestToCenter()
-      this._debugScroll('crown_settle', undefined, 'idx=' + idx)
-      if (idx >= 0) {
-        const changed = idx !== this.focusIdx
-        this._setFocus(idx, false)
-        if (changed) this._vibrateCrownSwitch()
-      }
+      this._crownScrolling = false
+      this._updateCrownFocus('crown_settle')
     }, this.crownSettleMs)
     return true
+  }
+
+  _updateCrownFocus(tag) {
+    const idx = this._nearestToCenter()
+    const changed = idx >= 0 && idx !== this.focusIdx
+    this._debugScroll(tag, undefined, 'idx=' + idx + ' changed=' + (changed ? 1 : 0))
+    if (!changed) return
+    this._setFocus(idx, false)
+    this._vibrateCrownSwitch()
   }
 
   _vibrateCrownSwitch() {

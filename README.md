@@ -92,8 +92,8 @@ Page({
 | `touchScrollStep` | 触屏 `scroll_frame_func.yoffset` 到内部滚动位置的倍率；调节手指滑动落焦距离 | `1` |
 | `crownEnable` | 是否注册 `onDigitalCrown` 处理表冠/滚轮滚动 | `true` |
 | `crownStep` | 表冠/滚轮 `degree` 到滚动像素的倍率；数值越大滚轮滚动越快 | `2.5` |
-| `crownSettleMs` | 表冠/滚轮停止后等待多久重建焦点 | `180` |
-| `crownVibrate` | 表冠停止后中心条目发生切换时振动；新 API 为 20ms 短强，旧 API 为实测短中降级 | `true` |
+| `crownSettleMs` | 表冠/滚轮停止后等待多久结束滚动状态并做最终焦点校准 | `180` |
+| `crownVibrate` | 表冠实时中心条目发生切换时振动；新 API 为 20ms 短强，旧 API 为实测短中降级 | `true` |
 | `debugScroll` | 输出 `[ZOList.scroll]` 诊断日志 | `false` |
 
 公开 API 不提供 `x/y/w/h`。列表始终从 `x=0, y=0` 开始，宽高由当前屏幕 profile 决定。若你选择 `hideStatusBar: false` 并需要避让状态栏，可以在列表顶部插入 `SPACER`。
@@ -351,7 +351,7 @@ const height = list.getProperty(listProp.HEIGHT)
 - 触屏点按显示黑色按下遮罩
 - 按键触发不显示按下遮罩
 - 触屏按下后只要发生实际移动就取消本次点击，避免滚动时误触发
-- 手指滑动或表冠/滚轮滚动开始后隐藏焦点；滚动停止后焦点落到屏幕中心最近项
+- 手指滑动时隐藏焦点，松手并完成滚动后才落到屏幕中心最近项；表冠/滚轮滚动时保持焦点可见并实时切换中心项
 - display-only `TEXT` / `IMAGE` / `CATEGORY` 进入焦点序列，但不显示焦点框、不触发动作
 - `header: false` 不创建 header
 - `footer: false` 不创建 footer；这会移除默认底部安全留白，通常只适合已自行追加底部 `SPACER` 或自定义底部区域的页面
@@ -399,7 +399,7 @@ zeus build
 1. Official-style rows: `TEXT`, `SWITCH`, `CHECKBOX`, `RADIO`, `CATEGORY`, `FOOTER`, `IMAGE`
 2. Physical-key focus navigation
 3. Touch press feedback
-4. Scroll-center focus landing after touch or crown/wheel scrolling
+4. Deferred touch-scroll focus landing and real-time crown/wheel focus switching
 5. Automatic round/square screen adaptation
 
 It is not a built-in ZeppOS widget, but the API intentionally resembles `createWidget(widget.X, Param)`.
@@ -464,8 +464,8 @@ Page({
 | `touchScrollStep` | Multiplier from touch `scroll_frame_func.yoffset` to internal scroll position; tune touch-scroll focus landing | `1` |
 | `crownEnable` | Register `onDigitalCrown` for crown/wheel scrolling | `true` |
 | `crownStep` | Multiplier from crown/wheel `degree` to scroll pixels; larger values scroll faster | `2.5` |
-| `crownSettleMs` | Delay before rebuilding focus after crown/wheel input settles | `180` |
-| `crownVibrate` | Vibrate when crown settling changes the centered item; 20ms strong-short on the scene API, tested short-medium fallback on the legacy API | `true` |
+| `crownSettleMs` | Delay before ending crown/wheel scrolling state and running final focus calibration | `180` |
+| `crownVibrate` | Vibrate on each real-time centered-item change from crown input; 20ms strong-short on the scene API, tested short-medium fallback on the legacy API | `true` |
 | `debugScroll` | Print `[ZOList.scroll]` diagnostic logs | `false` |
 
 The public API does not expose `x/y/w/h`. The list always starts at `x=0, y=0` and uses the active layout profile size. If you keep the status bar visible, insert a top `SPACER` when needed.
