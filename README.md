@@ -10,7 +10,7 @@
 
 **Zepp Style List（简称 ZSList）** 将 ZeppOS 系统风格列表页常见的页面结构封装成一个页面级组合控件，适合需要系统风格列表、物理按键焦点、触屏点击、表冠/滚轮滚动和圆屏/方屏适配的小程序页面：
 
-1. **官方风格行布局** — `TEXT` / `SWITCH` / `CHECKBOX` / `RADIO` / `CATEGORY` / `FOOTER` / `IMAGE`
+1. **系统风格行布局** — `TEXT` / `SWITCH` / `CHECKBOX` / `RADIO` / `CATEGORY` / `FOOTER` / `IMAGE`
 2. **物理按键焦点** — UP/DOWN 环绕导航，SELECT/HOME 触发当前项
 3. **触屏反馈** — 可点击项带按下遮罩，图片项带独立双描边焦点
 4. **滚动落焦** — 手指滑动或表冠/滚轮滚动结束后，焦点落到屏幕中心附近的条目
