@@ -1,5 +1,5 @@
 /**
- * zslist.js — ZSList, a ZeppOS-style List Page Library
+ * zslist.js — Zepp Style List (ZSList), a ZeppOS system-style List Page Library
  * ZeppOS 官方风格列表页面控件
  *
  * 设计目标: 用接近 createWidget(widget.X, Param) 的方式创建官方风格列表页。

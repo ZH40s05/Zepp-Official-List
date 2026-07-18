@@ -1,8 +1,8 @@
-# ZSList Project Notes
+# Zepp Style List Project Notes
 
 ## Scope
 
-- Type: community-maintained ZeppOS-style page-level list library with a bundled example app
+- Type: community-maintained ZeppOS system-style page-level list library with a bundled example app
 - Status: maintained library
 - Target devices: round 480px and square 390px example profiles
 - Entry files: `zslist.js`, `example/utils/zslist.js`
@@ -18,7 +18,7 @@
 
 - Package check: `npm pack --dry-run`
 - Example build: run `zeus build` in `example/`
-- True-device note: the directly compiled ZSList example passed the target Balance interaction test: touch focus changes after release, crown focus changes in real time, and the overall behavior substantially matches the restoration target. On that device vibration only worked after switching to the documented `setMode()` → `start()` sequence.
+- True-device note: the directly compiled Zepp Style List (ZSList) example passed the target Balance interaction test: touch focus changes after release, crown focus changes in real time, and the overall behavior substantially matches the restoration target. On that device vibration only worked after switching to the documented `setMode()` → `start()` sequence.
 
 ## Local Decisions
 

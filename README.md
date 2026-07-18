@@ -1,4 +1,4 @@
-# ZSList — ZeppOS 风格列表控件 / ZeppOS-style List Component
+# Zepp Style List — ZeppOS 系统风格列表控件 / ZeppOS System-style List Component
 
 [中文](#中文) | [English](#english)
 
@@ -8,7 +8,7 @@
 
 ### 是什么
 
-**ZSList** 将 ZeppOS 风格列表页常见的页面结构封装成一个页面级组合控件，适合需要系统风格列表、物理按键焦点、触屏点击、表冠/滚轮滚动和圆屏/方屏适配的小程序页面：
+**Zepp Style List（简称 ZSList）** 将 ZeppOS 系统风格列表页常见的页面结构封装成一个页面级组合控件，适合需要系统风格列表、物理按键焦点、触屏点击、表冠/滚轮滚动和圆屏/方屏适配的小程序页面：
 
 1. **官方风格行布局** — `TEXT` / `SWITCH` / `CHECKBOX` / `RADIO` / `CATEGORY` / `FOOTER` / `IMAGE`
 2. **物理按键焦点** — UP/DOWN 环绕导航，SELECT/HOME 触发当前项
@@ -394,9 +394,9 @@ zeus build
 
 ### What
 
-**ZSList** is a community-maintained ZeppOS-style list component for mini-program pages that need native-looking rows, physical-key focus, touch feedback, crown/wheel scrolling, and round/square screen adaptation. It wraps common list page building blocks into one page-level component:
+**Zepp Style List (ZSList)** is a community-maintained ZeppOS system-style list component for mini-program pages that need native-looking rows, physical-key focus, touch feedback, crown/wheel scrolling, and round/square screen adaptation. It wraps common list page building blocks into one page-level component:
 
-1. ZeppOS-style rows: `TEXT`, `SWITCH`, `CHECKBOX`, `RADIO`, `CATEGORY`, `FOOTER`, `IMAGE`
+1. ZeppOS system-style rows: `TEXT`, `SWITCH`, `CHECKBOX`, `RADIO`, `CATEGORY`, `FOOTER`, `IMAGE`
 2. Physical-key focus navigation
 3. Touch press feedback
 4. Deferred touch-scroll focus landing and real-time crown/wheel focus switching
